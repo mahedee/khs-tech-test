@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTest.Application.Commands;
-using TechTest.Application.Common;
 using TechTest.Application.DTOs;
 using TechTest.Core.Entities;
 using TechTest.Core.Interfaces;
@@ -32,8 +26,8 @@ namespace TechTest.Application.CommandHandler
             }
 
             var newClient = await _clientRepository.AddAsync(clientEntity);
-            var countryResponse = _mapper.Map<ClientDTO>(newClient);
-            return countryResponse;
+            var clientResponse = _mapper.Map<ClientDTO>(newClient);
+            return clientResponse;
         }
     }
 }

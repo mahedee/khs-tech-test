@@ -5,9 +5,9 @@ using TechTest.Infrastructure.Repository.Base;
 
 namespace TechTest.Infrastructure.Repository
 {
-    public class ClientRepository : Repository<Client>, IClientRepository
+    public class PackageRepository : Repository<Package>, IPackageRepository
     {
-        public ClientRepository(TechTestContext context) : base(context)
+        public PackageRepository(TechTestContext context) : base(context)
         {
 
         }

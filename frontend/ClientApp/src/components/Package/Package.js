@@ -20,9 +20,6 @@ export default class Package extends Component {
 
   componentDidMount() {
     this.populatePackageData();
-    // GetAllPackage().then((response) => {
-    //   //console.log("client response", response.data);
-    // });
   }
 
   // Event handler for create button
@@ -77,6 +74,7 @@ export default class Package extends Component {
           <tr>
             <th>Id</th>
             <th>Client Id</th>
+            <td>Client Name</td>
             <th>Package Name</th>
             <th>Actions</th>
           </tr>
@@ -86,6 +84,7 @@ export default class Package extends Component {
             <tr key={_package.id}>
               <td>{_package.id}</td>
               <td>{_package.clientId}</td>
+              <td>{_package.clientName}</td>
               <td>{_package.packageName}</td>
               <td>
                 <Link

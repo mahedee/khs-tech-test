@@ -43,7 +43,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 //builder.Services.AddMediatR(typeof(CreateCustomerHandler).GetTypeInfo().Assembly);
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IClientRepository, ClientRepository>();
-//builder.Services.AddScoped(typeof(ICommandRepository<>), typeof(CommandRepository<>));
+builder.Services.AddTransient<IPackageRepository, PackageRepository>();
 //builder.Services.AddTransient<Core.Repositories.Command.ICustomerCommandRepository, CustomerCommandRepository>();
 
 var app = builder.Build();

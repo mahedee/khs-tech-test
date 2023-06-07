@@ -17,6 +17,8 @@ namespace TechTest.Application.Common
             CreateMap<Client, CreateClientCommand>().ReverseMap();
             CreateMap<Client, EditClientCommand>().ReverseMap();
             CreateMap<Client, ClientDTO>().ReverseMap();
+            CreateMap<Package, PackageDTO>().ReverseMap();
+            CreateMap<Package, CreatePackageCommand>().ReverseMap();
 
             //CreateMap<ProductAggregateRoot, ProductResponseDTO>()
             //  .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

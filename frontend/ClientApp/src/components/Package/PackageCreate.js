@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { AddClient, GetAllClient } from "../../services/ClientService";
 import { AddPackage } from "../../services/PackageService";
 
@@ -24,19 +23,6 @@ export default class PackageCreate extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-
-    //alert(e.target.name);
-    //alert(e.target.value);
-    
-    // if (e.target.name === 'isActive') {
-    //   this.setState({
-    //       isActive : e.target.checked })
-    // }
-
-    // if (e.target.name === "countryId") {
-    //   this.getEntitiesByCountryId(e.target.value);
-    // }
-
   }
 
 
@@ -50,7 +36,7 @@ export default class PackageCreate extends Component {
         this.setState({ clients: response, loading: false, error: "" });
 
         //var clientId = ;
-        // set for the first tiem
+        // set for the first time
         this.setState({ clientId: response[0].id, loading: false, error: "" });
 
 
@@ -93,11 +79,6 @@ export default class PackageCreate extends Component {
       packageName: this.state.packageName,
     };
 
-    // axios.post("api/Employees/AddEmployee", employeeObj).then(result => {
-    //     history.push('/employees');
-    //})
-
-    console.log("Package obj", packageObj);
     AddPackage(packageObj).then((result) => {
       window.location.replace("/package");
     });
@@ -108,7 +89,6 @@ export default class PackageCreate extends Component {
 
     if (this.state.loading) {
       ddlClients = "Loading...";
-      //ddlEntities = "Loading...";
     } else {
       ddlClients = this.state.clients.map((item, i) => {
         return (
@@ -126,13 +106,6 @@ export default class PackageCreate extends Component {
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label className="control-label">Client: </label>
-              {/* <input
-                className="form-control"
-                type="text"
-                value={this.state.firstName}
-                onChange={this.onChangeFirstName}
-              ></input> */}
-
               <select
                 name="clientId"
                 className="form-control"

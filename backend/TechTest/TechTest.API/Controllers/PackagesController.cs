@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TechTest.Application.Commands;
+using TechTest.Application.DTOs;
+using TechTest.Application.Queries;
 using TechTest.Core.Entities;
 using TechTest.Infrastructure.Persistence;
 
@@ -10,21 +14,20 @@ namespace TechTest.API.Controllers
     public class PackagesController : ControllerBase
     {
         private readonly TechTestContext _context;
+        private readonly IMediator _mediator;
 
-        public PackagesController(TechTestContext context)
+        public PackagesController(TechTestContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
         // GET: api/Packages
         [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<Package>>> GetPackages()
+        public async Task<ActionResult<IEnumerable<PackageDTO>>> GetPackages()
         {
-            if (_context.Packages == null)
-            {
-                return NotFound();
-            }
-            return await _context.Packages.ToListAsync();
+            var response = await _mediator.Send(new GetAllPackageQuery());
+            return response;
         }
 
         // GET: api/Packages/5
@@ -79,16 +82,10 @@ namespace TechTest.API.Controllers
         // POST: api/Packages
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Add")]
-        public async Task<ActionResult<Package>> PostPackage(Package package)
+        public async Task<ActionResult<Package>> PostPackage([FromBody] CreatePackageCommand command)
         {
-            if (_context.Packages == null)
-            {
-                return Problem("Entity set 'TechTestContext.Packages'  is null.");
-            }
-            _context.Packages.Add(package);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPackage", new { id = package.Id }, package);
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         // DELETE: api/Packages/5

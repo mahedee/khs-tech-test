@@ -1,7 +1,6 @@
 ﻿using Location.Application.Queries.Countries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TechTest.Application.Commands;
 using TechTest.Application.Queries;
 using TechTest.Core.Entities;
@@ -13,14 +12,14 @@ namespace TechTest.API.Controllers
     [ApiController]
     public class ClientsController : ControllerBase
     {
-        private readonly TechTestContext _context;
+        //private readonly TechTestContext _context;
 
         private readonly IMediator _mediator;
 
-        public ClientsController(IMediator mediator, TechTestContext context)
+        public ClientsController(IMediator mediator)
         {
             _mediator = mediator;
-            _context = context;
+           // _context = context;
         }
 
         // GET: api/Clients
@@ -66,32 +65,6 @@ namespace TechTest.API.Controllers
             {
                 return BadRequest(exp.Message);
             }
-
-
-            //if (id != client.Id)
-            //{
-            //    return BadRequest();
-            //}
-
-            //_context.Entry(client).State = EntityState.Modified;
-
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!ClientExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            //return NoContent();
         }
 
         // POST: api/Clients
@@ -108,25 +81,21 @@ namespace TechTest.API.Controllers
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteClient(int id)
         {
-            if (_context.Clients == null)
+            try
             {
-                return NotFound();
+                string result = string.Empty;
+                result = await _mediator.Send(new DeleteClientCommand(id));
+                return Ok(result);
             }
-            var client = await _context.Clients.FindAsync(id);
-            if (client == null)
+            catch (Exception exp)
             {
-                return NotFound();
+                return BadRequest(exp.Message);
             }
-
-            _context.Clients.Remove(client);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
-        private bool ClientExists(int id)
-        {
-            return (_context.Clients?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        //private bool ClientExists(int id)
+        //{
+        //    return (_context.Clients?.Any(e => e.Id == id)).GetValueOrDefault();
+        //}
     }
 }

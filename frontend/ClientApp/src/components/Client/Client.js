@@ -20,43 +20,23 @@ export default class Client extends Component {
 
   componentDidMount() {
     this.populateClientData();
-    console.log("Client component -> component did mount");
-
-    GetAllClient().then((response) => {
-      console.log("client response", response.data);
-    });
+    GetAllClient().then((response) => {});
   }
 
   // Event handler for create button
   onClientCreate = () => {
-    console.log("client create event");
     const { history } = this.props;
     history.push("/client-create");
   };
 
   // Event handler for edit button
   OnClientEdit(id) {
-    //const { history } = this.props;
-   //history.push("/edit/" + id);
-    window.location.replace("/client-edit/"+id);
+    window.location.replace("/client-edit/" + id);
   }
 
   // Event handler for delete button
   OnClientDelete(id) {
-    //const { history } = this.props;
-    //history.push("/delete/" + id);
-    // console.log("Delete button clicked", id);
-    // window.Location='/client-create';
-
-    // const timeout = setTimeout(() => {
-      // redirects to an external URL
-      window.location.replace('/client-delete/'+id);
-    // }, 10);
-
-    // return () => clearTimeout(timeout);
-
-
-
+    window.location.replace("/client-delete/" + id);
   }
 
   populateClientData() {
@@ -93,25 +73,12 @@ export default class Client extends Component {
               <td>{client.firstName}</td>
               <td>{client.lastName}</td>
               <td>
-                {
-                /* 
-                <button
-                  onClick={() => this.OnClientEdit(client.id)}
-                  className="btn btn-success"
-                >
-                  Edit
-                </button> 
-                */
-                }
-
                 <Link
                   to={"/client-edit/" + client.id}
                   className="btn btn-success"
                 >
                   <i className="fa fa-edit"></i> Edit
-                </Link>
-                
-                {" "}
+                </Link>{" "}
                 ||
                 <button
                   onClick={() => this.OnClientDelete(client.id)}
@@ -139,12 +106,6 @@ export default class Client extends Component {
     return (
       <div>
         <h2>Clients</h2>
-        {/* <button
-          onClick={this.onClientCreate}
-          className="btn btn-primary"
-        >
-          Create
-        </button> */}
 
         <Link to={"/client-create"} className="btn btn-primary">
           Create

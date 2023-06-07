@@ -13,7 +13,8 @@ import PackageEdit from "./components/Package/PackageEdit";
 const AppRoutes = [
   {
     index: true,
-    element: <Home />
+    // element: <Home />
+    element: <Client/>
   },
   {
     path: '/counter',

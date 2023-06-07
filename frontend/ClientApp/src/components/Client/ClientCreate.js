@@ -42,10 +42,6 @@ export default class ClientCreate extends Component {
       lastName: this.state.lastName,
     };
 
-    // axios.post("api/Employees/AddEmployee", employeeObj).then(result => {
-    //     history.push('/employees');
-    //})
-
     AddClient(clientObj).then((result) => {
       window.location.replace("/client");
     });

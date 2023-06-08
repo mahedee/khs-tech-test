@@ -92,21 +92,6 @@ namespace TechTest.API.Controllers
                 return BadRequest(exp.Message);
             }
 
-
-            //if (_context.Packages == null)
-            //{
-            //    return NotFound();
-            //}
-            //var package = await _context.Packages.FindAsync(id);
-            //if (package == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //_context.Packages.Remove(package);
-            //await _context.SaveChangesAsync();
-
-            //return NoContent();
         }
 
         private bool PackageExists(int id)

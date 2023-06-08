@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Location.Application.Queries.Countries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechTest.Application.Commands;
@@ -6,6 +7,7 @@ using TechTest.Application.DTOs;
 using TechTest.Application.Queries;
 using TechTest.Core.Entities;
 using TechTest.Infrastructure.Persistence;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace TechTest.API.Controllers
 {
@@ -34,49 +36,36 @@ namespace TechTest.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Package>> GetPackage(int id)
         {
-            if (_context.Packages == null)
+            var response = await _mediator.Send(new GetPackageByIdQuery(id));
+            if (response == null)
             {
-                return NotFound();
+                return NotFound("Country information not found");
             }
-            var package = await _context.Packages.FindAsync(id);
-
-            if (package == null)
-            {
-                return NotFound();
-            }
-
-            return package;
+            return Ok(response);
         }
 
         // PUT: api/Packages/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("Edit/{id}")]
-        public async Task<IActionResult> PutPackage(int id, Package package)
+        public async Task<IActionResult> PutPackage(int id, [FromBody] EditPackageCommand command)
         {
-            if (id != package.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(package).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PackageExists(id))
+                if (command.Id == id)
                 {
-                    return NotFound();
+                    var result = await _mediator.Send(command);
+                    return Ok(result);
                 }
                 else
                 {
-                    throw;
+                    return BadRequest();
                 }
             }
-
-            return NoContent();
+            catch (Exception exp)
+            {
+                return BadRequest(exp.Message);
+            }
         }
 
         // POST: api/Packages
@@ -92,20 +81,32 @@ namespace TechTest.API.Controllers
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeletePackage(int id)
         {
-            if (_context.Packages == null)
+            try
             {
-                return NotFound();
+                string result = string.Empty;
+                result = await _mediator.Send(new DeletePackageCommand(id));
+                return Ok(result);
             }
-            var package = await _context.Packages.FindAsync(id);
-            if (package == null)
+            catch (Exception exp)
             {
-                return NotFound();
+                return BadRequest(exp.Message);
             }
 
-            _context.Packages.Remove(package);
-            await _context.SaveChangesAsync();
 
-            return NoContent();
+            //if (_context.Packages == null)
+            //{
+            //    return NotFound();
+            //}
+            //var package = await _context.Packages.FindAsync(id);
+            //if (package == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //_context.Packages.Remove(package);
+            //await _context.SaveChangesAsync();
+
+            //return NoContent();
         }
 
         private bool PackageExists(int id)

@@ -4,14 +4,13 @@ using TechTest.Core.Interfaces;
 
 namespace TechTest.Application.CommandHandler
 {
-    // Customer delete command handler with string response as output
     public class DeleteClientHandler : IRequestHandler<DeleteClientCommand, String>
     {
         private readonly IClientRepository _clientRepository;
 
-        public DeleteClientHandler(IClientRepository customerRepository)
+        public DeleteClientHandler(IClientRepository clientRepository)
         {
-            _clientRepository = customerRepository;
+            _clientRepository = clientRepository;
         }
 
         public async Task<string> Handle(DeleteClientCommand request, CancellationToken cancellationToken)

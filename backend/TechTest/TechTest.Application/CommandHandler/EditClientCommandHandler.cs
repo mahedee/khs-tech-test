@@ -24,7 +24,6 @@ namespace TechTest.Application.CommandHandler
         }
         public async Task<ClientDTO> Handle(EditClientCommand request, CancellationToken cancellationToken)
         {
-            //var customerEntity = CustomerMapper.Mapper.Map<Customer>(request);
 
             var clientEntity = _mapper.Map<Client>(request);
 

@@ -26,16 +26,6 @@ export default class PackageEdit extends Component {
     
       onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
-        
-        // if (e.target.name === 'isActive') {
-        //   this.setState({
-        //       isActive : e.target.checked })
-        // }
-    
-        // if (e.target.name === "countryId") {
-        //   this.getEntitiesByCountryId(e.target.value);
-        // }
-    
       }
     
     

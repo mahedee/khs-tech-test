@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTest.Application.Commands;
 using TechTest.Application.DTOs;
 using TechTest.Core.Entities;
@@ -19,12 +14,7 @@ namespace TechTest.Application.Common
             CreateMap<Client, ClientDTO>().ReverseMap();
             CreateMap<Package, PackageDTO>().ReverseMap();
             CreateMap<Package, CreatePackageCommand>().ReverseMap();
-
-            //CreateMap<ProductAggregateRoot, ProductResponseDTO>()
-            //  .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-            //  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-            //  .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-            //  .ReverseMap();
+            CreateMap<Package, EditPackageCommand>().ReverseMap();
         }
 
     }

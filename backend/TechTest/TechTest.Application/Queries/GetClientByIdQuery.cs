@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using TechTest.Application.DTOs;
-using TechTest.Core.Interfaces;
 
-namespace Location.Application.Queries.Countries
+namespace TechTest.Application.Queries.Countries
 {
     public class GetClientByIdQuery : IRequest<ClientDTO>
     {

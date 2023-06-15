@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.VisualBasic;
-using System.Net;
 using TechTest.Application.DTOs;
 using TechTest.Application.Queries;
 using TechTest.Core.Entities;
 using TechTest.Core.Interfaces;
 
 
-namespace Ordering.Application.Handlers.QueryHandlers
+namespace TechTest.Application.Handlers.QueryHandlers
 {
     public class GetAllPackageHandler : IRequestHandler<GetAllPackageQuery, List<PackageDTO>>
     {

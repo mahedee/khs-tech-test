@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Location.Application.Queries.Countries;
 using MediatR;
 using TechTest.Application.DTOs;
+using TechTest.Application.Queries.Countries;
 using TechTest.Core.Interfaces;
 
 namespace TechTest.Application.QueryHandlers

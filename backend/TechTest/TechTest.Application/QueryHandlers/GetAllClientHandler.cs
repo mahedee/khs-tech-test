@@ -4,9 +4,8 @@ using TechTest.Core.Entities;
 using TechTest.Core.Interfaces;
 
 
-namespace Ordering.Application.Handlers.QueryHandlers
-{
-    // Get all customer query handler with List<Customer> response as output
+namespace TechTest.Application.Handlers.QueryHandlers
+{ 
     public class GetAllClientHandler : IRequestHandler<GetAllClientQuery, List<Client>>
     {
         private readonly IClientRepository _clientRepository;

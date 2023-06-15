@@ -1,10 +1,9 @@
-﻿using Location.Application.Queries.Countries;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TechTest.Application.Commands;
 using TechTest.Application.Queries;
+using TechTest.Application.Queries.Countries;
 using TechTest.Core.Entities;
-using TechTest.Infrastructure.Persistence;
 
 namespace TechTest.API.Controllers
 {
